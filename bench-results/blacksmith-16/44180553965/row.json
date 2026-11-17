@@ -1,0 +1,38 @@
+{
+ "at": "2026-11-17T21:39:29+00:00",
+ "suite": "documenso",
+ "repo": "BluebagAI/bench-documenso",
+ "runner": "blacksmith-16",
+ "shards": "1",
+ "note": "measured",
+ "run": "https://github.com/BluebagAI/bench-documenso/actions/runs/44180553965",
+ "run_id": 44180553965,
+ "sha": "977cec0055d6ebb7c62ad2680db333d29da26c0c",
+ "conclusion": "failure",
+ "wall_s": 509,
+ "queue_s": 10,
+ "job_s": 509,
+ "jobs": 1,
+ "vcpu_min": 135.7,
+ "billed_min": 9,
+ "usd": 0.288,
+ "tests": {
+  "passed": 433,
+  "failed": 4,
+  "flaky": 4,
+  "skipped": 358,
+  "failed_tests": [
+   "folders/team-account-folders.spec.ts::[TEAMS]: can create a template folder::ui",
+   "folders/team-account-folders.spec.ts::[TEAMS]: can create document folder::ui",
+   "folders/team-account-folders.spec.ts::[TEAMS]: can rename a document folder::ui",
+   "folders/team-account-folders.spec.ts::[TEAMS]: can unpin a document folder::ui"
+  ],
+  "flaky_tests": [
+   "admin/email-transports/email-transport-claims.spec.ts::[ADMIN][EMAIL_TRANSPORT]: updating a subscription claim WITHOUT backport does not touch organisation claims::ui",
+   "documents/find-documents.spec.ts::sender filter should narrow results correctly::ui",
+   "envelope-editor-v2/envelope-save-as-template.spec.ts::save as template uses template counter, not document counter::ui",
+   "folders/team-account-folders.spec.ts::[TEAMS]: can pin a document folder::ui"
+  ],
+  "files": 1
+ }
+}
