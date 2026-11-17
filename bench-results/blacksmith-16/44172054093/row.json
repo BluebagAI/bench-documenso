@@ -1,0 +1,33 @@
+{
+ "at": "2026-11-17T20:51:01+00:00",
+ "suite": "documenso",
+ "repo": "BluebagAI/bench-documenso",
+ "runner": "blacksmith-16",
+ "shards": "1",
+ "note": "measured",
+ "run": "https://github.com/BluebagAI/bench-documenso/actions/runs/44172054093",
+ "run_id": 44172054093,
+ "sha": "977cec0055d6ebb7c62ad2680db333d29da26c0c",
+ "conclusion": "failure",
+ "wall_s": 485,
+ "queue_s": 36,
+ "job_s": 485,
+ "jobs": 1,
+ "vcpu_min": 129.3,
+ "billed_min": 9,
+ "usd": 0.288,
+ "tests": {
+  "passed": 443,
+  "failed": 2,
+  "flaky": 1,
+  "skipped": 353,
+  "failed_tests": [
+   "folders/team-account-folders.spec.ts::[TEAMS]: can rename a document folder::ui",
+   "folders/team-account-folders.spec.ts::[TEAMS]: can unpin a document folder::ui"
+  ],
+  "flaky_tests": [
+   "documents/find-documents.spec.ts::sender filter should narrow results correctly::ui"
+  ],
+  "files": 1
+ }
+}
