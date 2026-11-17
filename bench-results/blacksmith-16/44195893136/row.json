@@ -1,0 +1,31 @@
+{
+ "at": "2026-11-17T23:16:16+00:00",
+ "suite": "documenso",
+ "repo": "BluebagAI/bench-documenso",
+ "runner": "blacksmith-16",
+ "shards": "1",
+ "note": "measured",
+ "run": "https://github.com/BluebagAI/bench-documenso/actions/runs/44195893136",
+ "run_id": 44195893136,
+ "sha": "bd20f89cae22ff2a849ccfb6439cdf3faee0ec67",
+ "conclusion": "success",
+ "wall_s": 758,
+ "queue_s": 7,
+ "job_s": 758,
+ "jobs": 1,
+ "vcpu_min": 202.1,
+ "billed_min": 13,
+ "usd": 0.416,
+ "tests": {
+  "passed": 786,
+  "failed": 0,
+  "flaky": 2,
+  "skipped": 11,
+  "failed_tests": [],
+  "flaky_tests": [
+   "admin/organisations/update-organisation-member-role.spec.ts::[ADMIN]: promote member to owner::ui",
+   "envelope-editor-v2/envelope-save-as-template.spec.ts::save as template uses template counter, not document counter::ui"
+  ],
+  "files": 1
+ }
+}
