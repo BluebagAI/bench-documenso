@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-17T23:02:35+00:00",
+ "suite": "documenso",
+ "repo": "BluebagAI/bench-documenso",
+ "runner": "blacksmith-16",
+ "shards": "1",
+ "note": "measured",
+ "run": "https://github.com/BluebagAI/bench-documenso/actions/runs/44195593311",
+ "run_id": 44195593311,
+ "sha": "6533b5e9cf1f356c7e42493dbb94f725e7ec7a37",
+ "conclusion": "failure",
+ "wall_s": 42,
+ "queue_s": 9,
+ "job_s": 42,
+ "jobs": 1,
+ "vcpu_min": 11.2,
+ "billed_min": 1,
+ "usd": 0.032,
+ "tests": null
+}
