@@ -1,0 +1,30 @@
+{
+ "at": "2026-11-17T23:42:13+00:00",
+ "suite": "documenso",
+ "repo": "BluebagAI/bench-documenso",
+ "runner": "blacksmith-16",
+ "shards": "1",
+ "note": "measured",
+ "run": "https://github.com/BluebagAI/bench-documenso/actions/runs/44199791825",
+ "run_id": 44199791825,
+ "sha": "bd20f89cae22ff2a849ccfb6439cdf3faee0ec67",
+ "conclusion": "success",
+ "wall_s": 750,
+ "queue_s": 8,
+ "job_s": 750,
+ "jobs": 1,
+ "vcpu_min": 200.0,
+ "billed_min": 13,
+ "usd": 0.416,
+ "tests": {
+  "passed": 787,
+  "failed": 0,
+  "flaky": 1,
+  "skipped": 11,
+  "failed_tests": [],
+  "flaky_tests": [
+   "envelope-editor-v2/envelope-save-as-template.spec.ts::save as template uses template counter, not document counter::ui"
+  ],
+  "files": 1
+ }
+}
