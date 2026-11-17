@@ -1,0 +1,35 @@
+{
+ "at": "2026-11-17T21:30:34+00:00",
+ "suite": "documenso",
+ "repo": "BluebagAI/bench-documenso",
+ "runner": "blacksmith-16",
+ "shards": "1",
+ "note": "measured",
+ "run": "https://github.com/BluebagAI/bench-documenso/actions/runs/44178821254",
+ "run_id": 44178821254,
+ "sha": "977cec0055d6ebb7c62ad2680db333d29da26c0c",
+ "conclusion": "failure",
+ "wall_s": 559,
+ "queue_s": 9,
+ "job_s": 559,
+ "jobs": 1,
+ "vcpu_min": 149.1,
+ "billed_min": 10,
+ "usd": 0.32,
+ "tests": {
+  "passed": 432,
+  "failed": 3,
+  "flaky": 2,
+  "skipped": 362,
+  "failed_tests": [
+   "folders/team-account-folders.spec.ts::[TEAMS]: can create document folder::ui",
+   "folders/team-account-folders.spec.ts::[TEAMS]: can pin a document folder::ui",
+   "folders/team-account-folders.spec.ts::[TEAMS]: document folder visibility is visible to team member::ui"
+  ],
+  "flaky_tests": [
+   "admin/email-transports/email-transport-claims.spec.ts::[ADMIN][EMAIL_TRANSPORT]: updating a subscription claim WITHOUT backport does not touch organisation claims::ui",
+   "folders/team-account-folders.spec.ts::[TEAMS]: create document folder button is visible::ui"
+  ],
+  "files": 1
+ }
+}
