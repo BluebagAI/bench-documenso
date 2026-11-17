@@ -1,3 +1,5 @@
+> **Benchmark copy.** This repository is an unmodified copy of [documenso/documenso](https://github.com/documenso/documenso) at commit [`fdd0337bdd8f6afac64faf97113c65ed2dd0e2a2`](https://github.com/documenso/documenso/commit/fdd0337bdd8f6afac64faf97113c65ed2dd0e2a2), used to benchmark CI runners on the project's own Playwright suite. It is not affiliated with or endorsed by the project. The only changes: this note, `.github/workflows/bench.yml` (run by hand only), and the project's other GitHub Actions workflows and Dependabot config removed so nothing runs on its own. The project's license applies (see the license file). Each benchmark run's logs and test results are saved on the [`bench-results`](../../tree/bench-results) branch.
+
 <img src="https://github.com/documenso/documenso/assets/13398220/a643571f-0239-46a6-a73e-6bef38d1228b" alt="Documenso Logo">
 
 <p align="center" style="margin-top: 20px">

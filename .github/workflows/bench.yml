@@ -1,0 +1,81 @@
+# Benchmark copy of documenso/documenso's e2e-tests.yml (UI project, one job, no shards).
+# Every runner runs the same steps on the same commit; only the test step differs:
+# Boba runs it with coldteadotai/boba, the others run playwright test directly.
+# Retries, workers and maxFailures come from the project's own config with CI=true.
+name: bench
+on:
+  workflow_dispatch:
+    inputs:
+      runner:
+        type: choice
+        options: [boba-turbo, boba-standard, github-16, blacksmith-16, github-4, blacksmith-4]
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+  actions: read
+jobs:
+  e2e:
+    name: e2e (${{ inputs.runner }})
+    runs-on: ${{ startsWith(inputs.runner, 'boba') && 'coldtea-boba' || inputs.runner == 'github-16' && 'bench-16' || inputs.runner == 'github-4' && 'ubuntu-latest' || inputs.runner == 'blacksmith-4' && 'blacksmith-4vcpu-ubuntu-2404' || 'blacksmith-16vcpu-ubuntu-2404' }}
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy env
+        run: cp .env.example .env
+
+      - uses: ./.github/actions/node-install
+
+      - name: Start Services
+        run: npm run dx:up
+
+      - uses: ./.github/actions/playwright-install
+
+      - name: Build app
+        run: npm run build -w @documenso/remix
+
+      - name: Create the database
+        run: npm run prisma:migrate-dev
+
+      - name: Seed the database
+        run: npm run prisma:seed
+
+      # Upstream starts the app inside the test step with start-server-and-test.
+      # It moves into its own step so Boba starts the tests with the app already running.
+      - name: Start the app
+        run: |
+          npm run start -w @documenso/remix > app.log 2>&1 &
+          npx --yes wait-on@8 -t 120000 http://localhost:3000
+        env:
+          NODE_ENV: test
+          NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH: './example/cert.p12'
+          DANGEROUS_BYPASS_RATE_LIMITS: 'true'
+
+      - name: Run Playwright tests on Boba
+        if: startsWith(inputs.runner, 'boba')
+        uses: coldteadotai/boba@v1
+        with:
+          working-directory: packages/app-tests
+          project: ui
+          turbo: ${{ inputs.runner == 'boba-turbo' }}
+          fail-fast: false
+        env:
+          NODE_OPTIONS: '--import tsx'
+          NODE_ENV: test
+
+      - name: Run Playwright tests
+        if: ${{ !startsWith(inputs.runner, 'boba') }}
+        working-directory: packages/app-tests
+        run: npx playwright test --project=ui --reporter=list,json
+        env:
+          NODE_OPTIONS: '--import tsx'
+          NODE_ENV: test
+          PLAYWRIGHT_JSON_OUTPUT_FILE: results.json
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() && !startsWith(inputs.runner, 'boba') }}
+        with:
+          name: results-${{ inputs.runner }}
+          path: packages/app-tests/results.json
+          retention-days: 30
