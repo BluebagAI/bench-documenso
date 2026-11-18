@@ -9,10 +9,6 @@ on:
       runner:
         type: choice
         options: [boba-turbo, boba-standard, github-16, blacksmith-16, github-4, blacksmith-4]
-      boba_label:
-        description: Runner label for the Boba arm (coldtea-boba-8vcpu for an 8 vCPU runner)
-        type: string
-        default: coldtea-boba
 permissions:
   contents: read
   checks: write
@@ -21,7 +17,7 @@ permissions:
 jobs:
   e2e:
     name: e2e (${{ inputs.runner }})
-    runs-on: ${{ startsWith(inputs.runner, 'boba') && (inputs.boba_label != 'coldtea-boba' && fromJSON(format('["coldtea-boba","{0}"]', inputs.boba_label)) || 'coldtea-boba') || inputs.runner == 'github-16' && 'bench-16' || inputs.runner == 'github-4' && 'ubuntu-latest' || inputs.runner == 'blacksmith-4' && 'blacksmith-4vcpu-ubuntu-2404' || 'blacksmith-16vcpu-ubuntu-2404' }}
+    runs-on: ${{ startsWith(inputs.runner, 'boba') && 'coldtea-boba' || inputs.runner == 'github-16' && 'bench-16' || inputs.runner == 'github-4' && 'ubuntu-latest' || inputs.runner == 'blacksmith-4' && 'blacksmith-4vcpu-ubuntu-2404' || 'blacksmith-16vcpu-ubuntu-2404' }}
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
