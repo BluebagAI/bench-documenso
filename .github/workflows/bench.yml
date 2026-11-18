@@ -30,6 +30,15 @@ jobs:
       - name: Start Services
         run: npm run dx:up
 
+      # Benchmark change, same on every runner: upstream runs 3 workers (8 vCPU); at 6 workers
+      # (16 vCPU) each worker's Prisma pool exhausts Postgres's default 100 connections
+      # ("sorry, too many clients already"), so the limit is raised before the tests.
+      - name: Raise the database connection limit
+        run: |
+          docker exec database psql -U documenso -d documenso -c 'ALTER SYSTEM SET max_connections = 400'
+          docker restart database
+          until docker exec database pg_isready -U documenso -d documenso; do sleep 1; done
+
       - uses: ./.github/actions/playwright-install
 
       - name: Build app
@@ -63,6 +72,8 @@ jobs:
         env:
           NODE_OPTIONS: '--import tsx'
           NODE_ENV: test
+          NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH: './example/cert.p12'
+          DANGEROUS_BYPASS_RATE_LIMITS: 'true'
 
       - name: Run Playwright tests
         if: ${{ !startsWith(inputs.runner, 'boba') }}
@@ -71,6 +82,8 @@ jobs:
         env:
           NODE_OPTIONS: '--import tsx'
           NODE_ENV: test
+          NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH: './example/cert.p12'
+          DANGEROUS_BYPASS_RATE_LIMITS: 'true'
           PLAYWRIGHT_JSON_OUTPUT_FILE: results.json
 
       - uses: actions/upload-artifact@v4
