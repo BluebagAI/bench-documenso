@@ -35,9 +35,11 @@ jobs:
       # ("sorry, too many clients already"), so the limit is raised before the tests.
       - name: Raise the database connection limit
         run: |
-          docker exec database psql -U documenso -d documenso -c 'ALTER SYSTEM SET max_connections = 400'
+          sql() { docker exec database psql -U documenso -d documenso -tAc "$1"; }
+          for i in $(seq 90); do sql 'ALTER SYSTEM SET max_connections = 400' && break; sleep 1; done
           docker restart database
-          until docker exec database pg_isready -U documenso -d documenso; do sleep 1; done
+          for i in $(seq 90); do [ "$(sql 'SHOW max_connections' 2>/dev/null)" = 400 ] && break; sleep 1; done
+          [ "$(sql 'SHOW max_connections')" = 400 ]
 
       - uses: ./.github/actions/playwright-install
 
