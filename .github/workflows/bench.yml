@@ -21,7 +21,7 @@ permissions:
 jobs:
   e2e:
     name: e2e (${{ inputs.runner }})
-    runs-on: ${{ startsWith(inputs.runner, 'boba') && inputs.boba_label || inputs.runner == 'github-16' && 'bench-16' || inputs.runner == 'github-4' && 'ubuntu-latest' || inputs.runner == 'blacksmith-4' && 'blacksmith-4vcpu-ubuntu-2404' || 'blacksmith-16vcpu-ubuntu-2404' }}
+    runs-on: ${{ startsWith(inputs.runner, 'boba') && (inputs.boba_label != 'coldtea-boba' && fromJSON(format('["coldtea-boba","{0}"]', inputs.boba_label)) || 'coldtea-boba') || inputs.runner == 'github-16' && 'bench-16' || inputs.runner == 'github-4' && 'ubuntu-latest' || inputs.runner == 'blacksmith-4' && 'blacksmith-4vcpu-ubuntu-2404' || 'blacksmith-16vcpu-ubuntu-2404' }}
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
